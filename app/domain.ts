@@ -1,32 +1,37 @@
-export enum Chat {
+export enum ScrapingError {
+  Empty = 'EmptyFile',
+  Load = 'LoadError',
+  None = 'None'
+}
+
+export enum ChatType {
   None = 'None',
   Salesforce = 'Salesforce',
   Drift = 'Drift'
 }
 
 export enum Strategy {
-  None = 'None'
+  None = 'None',
+  IncludedScriptDomain = 'IncludedScriptDomain',
+  GlobalVar = 'GlobalVar',
+  IframeMatch = 'IframeMatch'
 }
 
-export enum ScrapingError {
-  None = 'None'
-}
-
-export interface Classification {
+export interface ScrapeClassification {
   strategy: Strategy;
-  class: Chat;
+  class: ChatType;
 }
 
 export type CompanyName = string;
 
 export interface CompanyInfo {
   companyName: CompanyName;
-  chatType: Chat;
+  chatType: ChatType;
 }
 
 export interface ScrapedCompanyInfo extends CompanyInfo {
   timestamp: Date;
   filePath: string;
   error: ScrapingError;
-  classifications: Classification[];
+  classifications: ScrapeClassification[];
 }

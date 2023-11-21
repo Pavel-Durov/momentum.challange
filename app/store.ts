@@ -1,11 +1,9 @@
 import { CompanyName, ScrapedCompanyInfo } from './domain';
-import { Logger } from 'winston';
-import { init } from './logger';
 
 export class CompanyStore {
   private store: Map<CompanyName, ScrapedCompanyInfo>;
 
-  constructor(private logger: Logger = init(CompanyStore.name)) {
+  constructor() {
     this.store = new Map<CompanyName, ScrapedCompanyInfo>();
   }
 

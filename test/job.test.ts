@@ -2,14 +2,14 @@ import { describe, expect, it } from '@jest/globals';
 
 import {join } from 'path';
 import * as fs from 'fs/promises'
-import { CompanyUpdateJob } from '../app/storeJob';
+import { StoreUpdateJob } from '../app/storeJob';
 
 
 describe('CompanyUpdateJob', () => {
 
   it('expected to split into correct batches', async () => {
     const files = await fs.readdir(join(__dirname, '../app/data/'));
-    const batched = CompanyUpdateJob.splitIntoBatches(files, 20);
+    const batched = StoreUpdateJob.splitIntoBatches(files, 20);
 
     expect(batched.length).toBe(6);
     expect(batched[0]).toEqual(files.slice(0, 20));

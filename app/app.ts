@@ -5,8 +5,9 @@ import { init } from './logger';
 import { CRON_SCHEDULE, PORT } from './config';
 
 import { CompanyStore } from './store';
-import { CompanyUpdateJob } from './storeJob';
+import { StoreUpdateJob } from './storeJob';
 import { StatusCodes } from 'http-status-codes';
+import { Scraper } from './scraper';
 
 const app: express.Application = express();
 
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(cors(options));
 
 const store = new CompanyStore();
-const updateJob = new CompanyUpdateJob(store, CRON_SCHEDULE);
+const updateJob = new StoreUpdateJob(store, new Scraper(), CRON_SCHEDULE);
 
 app.use('/chat', router(store));
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import { CompanyStore } from '../app/store';
-import { Chat, ScrapedCompanyInfo, ScrapingError } from '../app/domain';
+import { ChatType, ScrapedCompanyInfo, ScrapingError } from '../app/domain';
 
 
 describe('CompanyStore', () => {
@@ -14,7 +14,7 @@ describe('CompanyStore', () => {
     const store = new CompanyStore()
     const record: ScrapedCompanyInfo = {
       companyName: 'test',
-      chatType: Chat.Drift,
+      chatType: ChatType.Drift,
       filePath: 'file://test',
       timestamp: new Date(),
       error: ScrapingError.None,
