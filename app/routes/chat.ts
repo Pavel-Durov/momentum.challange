@@ -2,7 +2,12 @@ import express from 'express';
 
 const router = express.Router();
 
-router.post('/drift', async (req, res) => {
+// TODO: not sure why this endpoints is called /drift
+// router.post('/drift', async (req, res) => {
+//   res.send([{ companyName: '', hasDrift: false }]);
+// });
+
+router.post('/find', async (req, res) => {
   res.send([{ companyName: '', hasDrift: false }]);
 });
 

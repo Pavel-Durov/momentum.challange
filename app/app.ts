@@ -1,6 +1,9 @@
 import cors from 'cors';
 import express from 'express';
 import router from './routes/chat';
+import { init } from './logger';
+
+const log = init('server');
 
 const app: express.Application = express();
 
@@ -13,5 +16,5 @@ app.use(cors(options));
 app.use('/chat', router);
 
 app.listen('8080', function () {
-  console.log('listening on http://localhost:8080');
+  log.info('listening on http://localhost:8080');
 });
