@@ -1,7 +1,7 @@
 import * as cron from 'node-cron';
 import * as fs from 'fs/promises';
 
-import path from 'path';
+import { join } from 'path';
 
 import { CompanyStore } from './store';
 import { init } from './logger';
@@ -34,7 +34,7 @@ export class CompanyUpdateJob {
   private async update() {
     this.log.info('background job started');
     try {
-      const directoryPath = path.join(__dirname, './data/');
+      const directoryPath = join(__dirname, './data/');
       const files = await fs.readdir(directoryPath);
       const batches = CompanyUpdateJob.splitIntoBatches(files, this.BATCH_SIZE);
       for (const files of batches) {

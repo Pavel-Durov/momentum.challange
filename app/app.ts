@@ -22,7 +22,7 @@ app.use(cors(options));
 const store = new CompanyStore();
 const updateJob = new CompanyUpdateJob(store, CRON_SCHEDULE);
 
-app.use('/chat', router(store),)
+app.use('/chat', router(store));
 
 app.get('/health', (req, res) => {
   res.send('I am alive!').status(StatusCodes.OK);

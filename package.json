@@ -8,7 +8,7 @@
     "start": "tsx ./app/app.ts",
     "dev": "ts-node-dev --respawn --transpile-only ./app/app.ts",
     "lint:fix": "biome format ./app/**  ./app/** --write",
-    "lint": "biome format ./app/**  ./app/**",
+    "lint": "biome format ./app/** ./app/** ./test/**",
     "build": "tsc",
     "prepare": "husky install",
     "commitlint": "commitlint --edit"
