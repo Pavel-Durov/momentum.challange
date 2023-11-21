@@ -3,19 +3,12 @@
 ## Getting started
 
 ```shell
-$ npm install
+$ yarn
 ```
 
 ## Run
-
 ```shell
-$ tsx src/index.ts
-```
-
-## Build
-
-```shell
-$ npm run build
+$yarn start
 ```
 
 ## Test
@@ -26,8 +19,8 @@ $ npm run test
 ## Lint
 
 ```shell
-$ npm run lint # lint check
-$ npm run lint:fix # lint write
+$ yarn lint # lint check
+$ yarn lint:fix # lint write
 ```
 
 ## Git hooks

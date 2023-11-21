@@ -10,8 +10,8 @@ const options: cors.CorsOptions = {
 
 app.use(express.json());
 app.use(cors(options));
-app.use('/chat', router)
+app.use('/chat', router);
 
-app.listen('8080', function() {
+app.listen('8080', function () {
   console.log('listening on http://localhost:8080');
 });

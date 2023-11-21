@@ -1,12 +1,9 @@
-import express from "express";
+import express from 'express';
 
-const router = express.Router()
+const router = express.Router();
 
 router.post('/drift', async (req, res) => {
-  
-  res.send([
-    { companyName: '', hasDrift: false}
-  ]);
-})
+  res.send([{ companyName: '', hasDrift: false }]);
+});
 
-export default router; 
+export default router;
