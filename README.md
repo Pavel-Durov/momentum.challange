@@ -1,6 +1,32 @@
 # TypeScript Template
 
-## Getting started
+## Overview
+
+In this solution, we have multiple components - `Server`, `UpdateJob`, `Store`, `Scraper` and the `Classifier`.
+
+`Store` - simple in-memory store. Stores scraped company information.
+
+`Server` - serves incoming HTTP traffic and returns classified/scraped company data from the Store.
+
+`UpdateJob` - updates and schedules future cronjob to update company information in the `Store`.
+
+
+`Scraper` - scrapes website information and classifies each company site with its findings. Each site might have multiple classifications. 
+
+`Classifier` - the decision-making component based on the scraped company information. Currently, it's a dump component, it just uses the first scraped information it gets but it can be extended.
+
+## Known issues
+
+- This design was intended to be included in a single process, for simplicity reasons and time constraints. An actual implementation would probably include multiple distributed components. For example, if we want to scale `Server` horizontally we will need to distribute `Server`, `UpdateJob` and `Store`.
+
+- Some HTML pages fail to load, others are empty files.
+
+- In terms of scraping classification, the only thing I could think about is to check included scripts and global variables. I am sure there's more that can be done to improve the chat technology identification.
+
+- Scraping classification has low accuracy - it can only identify a few Drift and a few Salesforce chats.
+
+
+## Install dependencies
 
 ```shell
 $ yarn
@@ -8,7 +34,15 @@ $ yarn
 
 ## Run
 ```shell
-$yarn start
+$ yarn start
+```
+### Try it
+```shell
+$ curl -i -XGET  localhost:8000/chat/find  
+HTTP/1.1 200 OK
+...
+
+[..., {"companyName":"bittitan.html","chatType":"Drift"}, ...{"companyName":"exabeam.html","chatType":"None"}, ..., {"companyName":"konfio.mx.html","chatType":"Salesforce"}, ...]
 ```
 
 ## Test
