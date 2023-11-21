@@ -2,10 +2,15 @@ import cors from 'cors';
 import express from 'express';
 import router from './routes/chat';
 import { init } from './logger';
+import { CRON_SCHEDULE, PORT } from './config';
 
-const log = init('server');
+import { CompanyStore } from './store';
+import { CompanyUpdateJob } from './storeJob';
+import { StatusCodes } from 'http-status-codes';
 
 const app: express.Application = express();
+
+const log = init('server');
 
 const options: cors.CorsOptions = {
   origin: '*'
@@ -13,8 +18,17 @@ const options: cors.CorsOptions = {
 
 app.use(express.json());
 app.use(cors(options));
-app.use('/chat', router);
 
-app.listen('8080', function () {
-  log.info('listening on http://localhost:8080');
+const store = new CompanyStore();
+const updateJob = new CompanyUpdateJob(store, CRON_SCHEDULE);
+
+app.use('/chat', router(store),)
+
+app.get('/health', (req, res) => {
+  res.send('I am alive!').status(StatusCodes.OK);
+});
+
+app.listen(PORT, function () {
+  log.info(`listening on http://localhost:${PORT}`);
+  updateJob.updateOneAndSchedule();
 });

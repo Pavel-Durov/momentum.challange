@@ -1,14 +1,15 @@
 import express from 'express';
+import { CompanyStore } from '../store';
+import { CompanyInfo } from '../domain';
+import { StatusCodes } from 'http-status-codes';
 
-const router = express.Router();
+export default function (store: CompanyStore) {
+  const router = express.Router();
 
-// TODO: not sure why this endpoints is called /drift
-// router.post('/drift', async (req, res) => {
-//   res.send([{ companyName: '', hasDrift: false }]);
-// });
-
-router.post('/find', async (req, res) => {
-  res.send([{ companyName: '', hasDrift: false }]);
-});
-
-export default router;
+  router.get('/find', async (req, res) => {
+    const result = store.getAll();
+    const companies: CompanyInfo[] = result.map(({ companyName, chatType }) => ({ companyName, chatType }));
+    res.status(StatusCodes.OK).json(companies).send();
+  });
+  return router;
+}
