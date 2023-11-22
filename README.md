@@ -26,6 +26,8 @@ In this solution, we have multiple components - `Server`, `UpdateJob`, `Store`, 
 - Scraping classification has low accuracy - it can only identify a few Drift and a few Salesforce chats.
 
 - I am not sure what kind of tooling was used for snapshotting HTML files but I think it can be definitely improved.
+  
+- It takes time to scrape all the HTML files. The server endpoint `GET /chat/find` will return the data it has, but the list might be incomplete if the processing of HTML files is not completed.
 
 ## Install dependencies
 
