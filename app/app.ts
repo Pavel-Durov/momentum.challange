@@ -29,7 +29,17 @@ app.get('/health', (req, res) => {
   res.send('I am alive!').status(StatusCodes.OK);
 });
 
-app.listen(PORT, function () {
-  log.info(`listening on http://localhost:${PORT}`);
+const server = app.listen(PORT, function () {
+  log.info(`listening on http://localhost:${PORT}. pid ${process.pid}`);
   updateJob.updateOneAndSchedule();
+});
+
+server.on('close', () => {
+  log.info('Server stopped! Process will exit now.');
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  log.info('Received SIGTERM! Refusing new connections.');
+  server.close();
 });
