@@ -21,10 +21,11 @@ In this solution, we have multiple components - `Server`, `UpdateJob`, `Store`, 
 
 - Some HTML pages fail to load, others are empty files.
 
-- In terms of scraping classification, the only thing I could think about is to check included scripts and global variables. I am sure there's more that can be done to improve the chat technology identification.
+- In terms of scraping classification, the only thing I could think about in the given timeframe was to check included scripts and global variables. I am sure there's more that can be done to improve chat technology identification.
 
 - Scraping classification has low accuracy - it can only identify a few Drift and a few Salesforce chats.
 
+- I am not sure what kind of tooling was used for snapshotting HTML files but I think it can be definitely improved.
 
 ## Install dependencies
 
